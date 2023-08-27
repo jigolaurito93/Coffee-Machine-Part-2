@@ -1,10 +1,9 @@
 from menu import menu, resources
 
-import math
-
 # Flag to indicate whether the loop runs 
 machine_on = True
 
+# Money inside the machine
 money_inside = 0
 
 # Function to display the amount of resources in the coffee machine
@@ -40,19 +39,25 @@ def coins():
     return total
 
 def is_transaction_successful(payment, drink_cost):
+    # Function to check if money inserted is sufficient
     if payment < drink_cost:
         print(f"Sorry that's not enough money. Money refunded.")
         machine_online = False
     else:
+        #If payment is more than the cost, refund the change
          global money_inside
          money_inside += payment
          user_change = payment - drink_cost
          money_inside -= user_change
          print(f"\nHere is ${user_change:.2f} dollars in change.")
 
+
 def make_coffee(drink_name, order_ingredients):
+    #  Deduct the required amount of ingredients from the resources
      for item in order_ingredients:
           resources[item] -= order_ingredients[item]
+    # Display message saying coffee is served
+     print(f"Here is your {choice} ☕. Enjoy!\n")
 
 
 
@@ -78,13 +83,8 @@ while machine_on:
                 is_transaction_successful(payment, drink_cost)
                 make_coffee(choice, drink['ingredients'])
 
-                
-
-
-                
-          
-    
     else:
+          # If user input something else, display this message
           print("Invalid input, please try again.")
 
     
